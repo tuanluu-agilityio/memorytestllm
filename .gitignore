@@ -1,0 +1,11 @@
+﻿.env.local
+.env*.local
+node_modules/
+dist/
+*.docx
+~$*
+test-results/
+playwright-report/
+supabase/.temp/
+.netlify/
+.superpowers/
