@@ -3,6 +3,8 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { AuthProvider, useAuth } from './auth/AuthProvider';
 import Header from './components/Header';
 import Game from './game/Game';
+import History from './pages/History';
+import Leaderboard from './pages/Leaderboard';
 import type { StartedSession } from './lib/api';
 
 export const SAVE_TITLE = 'Save this result — log in or sign up';
@@ -28,8 +30,9 @@ function Home() {
 }
 
 function Guarded({ children }: { children: React.ReactNode }) {
-  const { user, openAuth } = useAuth();
-  useEffect(() => { if (!user) openAuth(); }, [user, openAuth]);
+  const { user, ready, openAuth } = useAuth();
+  useEffect(() => { if (ready && !user) openAuth(); }, [ready, user, openAuth]);
+  if (!ready) return null;
   return user ? children : <Navigate to="/" replace />;
 }
 
@@ -41,8 +44,8 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/history" element={<Guarded><section className="card"><h2>History</h2></section></Guarded>} />
-            <Route path="/leaderboard" element={<section className="card"><h2>Leaderboard</h2></section>} />
+            <Route path="/history" element={<Guarded><History /></Guarded>} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
           </Routes>
         </main>
       </AuthProvider>

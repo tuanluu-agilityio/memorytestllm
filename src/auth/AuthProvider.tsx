@@ -6,6 +6,8 @@ import AuthModal from './AuthModal';
 type User = { id: string; email: string };
 type AuthCtx = {
   user: User | null;
+  /** False until the stored session has been restored. */
+  ready: boolean;
   openAuth: (title?: string) => void;
   signOut: () => Promise<void>;
   /** The guest session to claim on the next sign-in (memory only). */
@@ -23,6 +25,7 @@ export function useAuth(): AuthCtx {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [ready, setReady] = useState(false);
   const [modalTitle, setModalTitle] = useState<string | null>(null);
   const [pendingSaved, setPendingSaved] = useState(false);
   const pending = useRef<StartedSession | null>(null);
@@ -31,6 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       const u = session?.user;
       setUser(u ? { id: u.id, email: u.email ?? '' } : null);
+      setReady(true);
       const s = pending.current;
       if (event === 'SIGNED_IN' && s) {
         pending.current = null;
@@ -49,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = useCallback(async () => { await supabase.auth.signOut(); }, []);
 
   return (
-    <Ctx.Provider value={{ user, openAuth, signOut, setPending, pendingSaved }}>
+    <Ctx.Provider value={{ user, ready, openAuth, signOut, setPending, pendingSaved }}>
       {children}
       {modalTitle && <AuthModal title={modalTitle} onClose={() => setModalTitle(null)} />}
     </Ctx.Provider>
