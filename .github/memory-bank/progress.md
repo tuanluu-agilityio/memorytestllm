@@ -8,8 +8,7 @@
 - Tests: unit (Vitest), integration against real Supabase, e2e (Playwright)
 - AI context: `CLAUDE.md`, `.github/` instructions, agents, memory bank
 
-## Pending
-- Netlify deploy (blocked: token 401). Live URL: not yet deployed.
+- Deployed to Netlify: https://memory-test-tuan.netlify.app (2026-10-25; `/`, `/history`, `/leaderboard` return 200; live leaderboard e2e passes)
 
 ## Known gaps (accepted)
 - No minimum-time anti-cheat; words are visible in the network tab.
