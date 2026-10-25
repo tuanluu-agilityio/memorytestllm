@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* v0 palette, exposed as Tailwind tokens (bg-card, text-muted, ...) */
+@theme {
+  --color-bg: #1a1a1a;
+  --color-card: #2a2a2a;
+  --color-panel: #1f1f1f;
+  --color-line: #3a3a3a;
+  --color-text: #f2efe8;
+  --color-muted: #a9a69e;
+  --color-blue: #6a9fd8;
+  --color-orange: #e0735a;
+  --color-green: #4ade80;
+  --font-heading: Georgia, "Times New Roman", serif;
+}
+
+/* ---------- v0 styles, kept verbatim for visual parity ---------- */
+:root{
+  --bg:#1a1a1a; --card:#2a2a2a; --panel:#1f1f1f; --border:#3a3a3a;
+  --text:#f2efe8; --muted:#a9a69e; --blue:#6a9fd8; --orange:#e0735a;
+  --green:#4ade80; --green-bg:#0f2a17; --green-bd:#1f5a30; --miss-bg:#2e1b17; --miss-bd:#5a2f26;
+  --heading:Georgia,"Times New Roman",serif;
+}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;
+     display:flex;justify-content:center;padding:24px 16px 48px}
+#root{width:100%;max-width:590px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;min-height:200px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.card h2{font-family:var(--heading);font-weight:400;font-size:24px;letter-spacing:-.01em;margin:0 0 10px}
+.card p{margin:0 0 24px;color:var(--muted);max-width:480px}
+.btn{font:inherit;font-weight:600;border:0;border-radius:999px;background:#fff;color:#111;padding:14px 40px;cursor:pointer}
+.btn:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:default}
+.word{font-family:var(--heading);font-size:44px;letter-spacing:-.01em;min-height:60px}
+.counter{color:var(--muted);font-size:14px;margin-top:8px}
+.label{color:var(--muted);margin-bottom:12px}
+textarea{width:100%;max-width:400px;height:82px;background:#111;color:var(--text);border:1px solid var(--border);
+         border-radius:8px;padding:12px;font:inherit;resize:vertical;outline:none;margin-bottom:14px}
+textarea:focus{border-color:#35507a}
+.full{width:100%;max-width:400px}
+.score{font-family:var(--heading);font-size:24px;margin-bottom:14px}
+.score b{color:var(--blue);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:22px}
+.chip{font-size:14px;border-radius:999px;padding:2px 12px;border:1px solid}
+.chip i{font-style:normal;font-size:10px;opacity:.7;margin-right:4px}
+.chip.hit{color:var(--green);background:var(--green-bg);border-color:var(--green-bd)}
+.chip.miss{color:var(--orange);background:var(--miss-bg);border-color:var(--miss-bd);text-decoration:line-through;text-decoration-color:#7a3d30}
+.chart{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px 24px 16px;margin-bottom:16px}
+.chart h3{margin:0 0 14px;font-size:11px;letter-spacing:.08em;font-weight:500;color:var(--muted);text-transform:uppercase}
+.bars{display:flex;gap:4px;height:60px;align-items:flex-end}
+.bar{flex:1;background:var(--blue);border-radius:6px 6px 0 0;transition:height .6s cubic-bezier(.2,.8,.2,1);height:0}
+.bar.miss{background:#444;opacity:.6}
+.nums{display:flex;gap:4px;margin-top:6px}
+.nums span{flex:1;text-align:center;font-size:10px;color:var(--muted)}
+.grad{height:4px;border-radius:2px;margin-top:8px;background:linear-gradient(90deg,var(--blue),#33415a 30%,#333 50%,#33415a 70%,var(--blue))}
+.legend{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px}
+.insight{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px 20px;text-align:left;margin-bottom:16px}
+.insight p{color:var(--text);margin:0;max-width:none}
+.insight hr{border:0;border-top:1px solid var(--border);margin:14px 0}
+.insight .warn{color:var(--orange)}
+.insight em{font-style:normal;color:var(--blue)}
+.replay{font:inherit;border:0;cursor:pointer;background:none;color:var(--muted);font-size:11px;font-weight:400;text-decoration:underline;padding:4px;border-radius:0}
+.stats{font-size:12px;color:var(--muted);margin-bottom:12px}
+
+/* ---------- v1 additions ---------- */
+.link{background:none;border:0;padding:0;font:inherit;color:var(--blue);text-decoration:underline;cursor:pointer}
+.field{width:100%;background:#111;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font:inherit;outline:none}
+.field:focus{border-color:#35507a}
