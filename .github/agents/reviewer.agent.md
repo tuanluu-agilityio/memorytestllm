@@ -8,5 +8,5 @@ You review changes to Memory Test. Check every item below and report violations 
 - No email leaves the database; leaderboard and stats use only valid sessions.
 - `?fast=1` cannot affect production builds.
 - No secrets from `.env.local` in code, logs or commits.
-- Netlify changes only target the `memory-test-tuan` site.
+- Netlify changes only target the `memorytestllm` site.
 - Each behavior change has a test.

@@ -10,13 +10,13 @@ A word-recall game (15 words, 1.5 s each) that demonstrates the serial-position 
 - `npm run build`: type-check + production build
 - `npm run db:push`: apply `supabase/migrations/*` via Supabase CLI
 - `node --env-file=.env.local scripts/sql.mjs "<sql>"`: run SQL via the Management API
-- `node --env-file=.env.local scripts/deploy.mjs`: build, deploy to Netlify site `memory-test-tuan`, set Supabase Auth URLs
+- `node --env-file=.env.local scripts/deploy.mjs`: build, deploy to Netlify site `memorytestllm` (https://memorytestllm.netlify.app), set Supabase Auth URLs
 
 ## Rules
 - Never read, print or commit values from `.env.local`; refer to variables by name only.
 - Clients never touch tables: all data access goes through the security-definer RPCs in `supabase/migrations/*_rpc.sql`.
 - Keep v0 look and timings (`legacy/index.v0.html` is the reference).
-- Netlify: only ever touch the `memory-test-tuan` site.
+- Netlify: only ever touch the `memorytestllm` site (renamed from `memory-test-tuan` on 2026-10-25).
 
 ## Context
 @.github/copilot-instructions.md
