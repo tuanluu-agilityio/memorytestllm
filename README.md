@@ -2,7 +2,7 @@
 
 A word-recall game that demonstrates the **serial-position effect** (primacy–recency). You see 15 random words, one at a time (1.5 s each), then type every word you remember. The results show which positions you recalled, and explain how the same U-shaped curve shows up in LLM context windows.
 
-**Live:** https://memory-test-tuan.netlify.app
+**Live:** https://memorytestllm.netlify.app
 
 ## Features
 

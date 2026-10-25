@@ -8,7 +8,7 @@
 - Tests: unit (Vitest), integration against real Supabase, e2e (Playwright)
 - AI context: `CLAUDE.md`, `.github/` instructions, agents, memory bank
 
-- Deployed to Netlify: https://memory-test-tuan.netlify.app (2026-10-25; `/`, `/history`, `/leaderboard` return 200; live leaderboard e2e passes)
+- Deployed to Netlify: https://memorytestllm.netlify.app (site `memorytestllm`, renamed from `memory-test-tuan`; 2026-10-25; `/`, `/history`, `/leaderboard` return 200; live leaderboard e2e passes)
 
 ## Known gaps (accepted)
 - No minimum-time anti-cheat; words are visible in the network tab.

@@ -1,9 +1,9 @@
-// Build and deploy to Netlify (site "memory-test-tuan" only), then point Supabase Auth at the live URL.
+// Build and deploy to Netlify (site "memorytestllm" only), then point Supabase Auth at the live URL.
 // Usage: node --env-file=.env.local scripts/deploy.mjs
 import { execSync } from 'node:child_process';
 import { assertOk, mergeAllowList, pickSite } from './deploy-lib.mjs';
 
-const SITE_NAME = 'memory-test-tuan';
+const SITE_NAME = 'memorytestllm';
 const { NETLIFY_AUTH_TOKEN, SUPABASE_PROJECT_REF, SUPABASE_ACCESS_TOKEN } = process.env;
 
 async function api(url, token, init = {}) {
