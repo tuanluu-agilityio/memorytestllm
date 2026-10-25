@@ -1,0 +1,15 @@
+-- Word bank: 10 topics x 30 common concrete nouns (lowercase a-z). Includes the 30 v0 words.
+insert into public.words (word, topic)
+select w, t from (values
+  ('animals', array['tiger','rabbit','turtle','donkey','parrot','monkey','spider','beaver','camel','dolphin','eagle','falcon','giraffe','hamster','jaguar','koala','lizard','otter','panda','penguin','pigeon','salmon','shark','sheep','snail','squirrel','walrus','weasel','zebra','badger']),
+  ('food', array['bread','butter','cheese','cookie','noodle','pepper','pickle','potato','tomato','walnut','almond','bagel','banana','carrot','cherry','garlic','honey','lemon','mango','muffin','olive','onion','orange','peanut','pizza','pretzel','radish','salad','waffle','yogurt']),
+  ('nature', array['forest','meadow','canyon','pebble','orchard','river','valley','island','glacier','desert','jungle','volcano','cliff','cave','lagoon','prairie','swamp','creek','dune','boulder','pond','reef','marsh','grove','ridge','summit','delta','geyser','oasis','tundra']),
+  ('objects', array['candle','marble','mirror','blanket','button','feather','lantern','kettle','pencil','basket','bottle','bucket','carpet','curtain','envelope','glove','jacket','copper','mitten','napkin','pillow','ribbon','scarf','sock','spoon','silver','towel','wallet','zipper','umbrella']),
+  ('places', array['bridge','garden','village','harbor','tunnel','castle','temple','school','museum','market','library','airport','bakery','cabin','chapel','circus','factory','farm','hotel','palace','prison','station','stadium','theater','tower','zoo','office','cafe','church','mall']),
+  ('music', array['violin','whistle','guitar','piano','trumpet','drum','flute','banjo','cello','harp','organ','tuba','bugle','cymbal','fiddle','horn','lute','oboe','piccolo','ukulele','melody','rhythm','chorus','ballad','anthem','opera','tempo','tune','lyric','choir']),
+  ('sports', array['soccer','tennis','hockey','rugby','boxing','karate','skiing','rowing','archery','cricket','golf','judo','polo','surfing','diving','cycling','racket','helmet','trophy','medal','goal','referee','wicket','paddle','jersey','puck','dart','bowling','sprint','relay']),
+  ('weather', array['thunder','rain','snow','storm','cloud','fog','hail','breeze','frost','drizzle','blizzard','rainbow','sunshine','tornado','typhoon','monsoon','mist','sleet','gale','drought','flood','lightning','dew','icicle','heatwave','haze','cyclone','squall','shower','gust']),
+  ('tools', array['hammer','ladder','compass','anchor','saddle','rocket','shovel','wrench','pliers','chisel','drill','saw','axe','rake','hoe','trowel','funnel','magnet','needle','scissors','stapler','sponge','broom','ladle','crowbar','level','mallet','pulley','spanner','toolbox']),
+  ('body', array['elbow','finger','ankle','shoulder','knee','wrist','thumb','spine','tongue','tooth','heart','lung','liver','kidney','brain','muscle','skull','chin','cheek','eyebrow','forehead','eyelash','nostril','knuckle','palm','heel','throat','belly','hip','nose'])
+) as v(t, ws), unnest(ws) as w
+on conflict (word) do nothing;
