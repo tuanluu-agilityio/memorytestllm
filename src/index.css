@@ -32,7 +32,11 @@ body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-ap
 .btn:hover{opacity:.9}
 .btn:disabled{opacity:.5;cursor:default}
 .word{font-family:var(--heading);font-size:44px;letter-spacing:-.01em;height:60px;line-height:60px;white-space:nowrap}
-.counter{color:var(--muted);font-size:14px;margin-top:8px;height:20px;line-height:20px}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:28px;height:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:#555;transition:background .2s,box-shadow .2s}
+.dot.on{background:var(--blue)}
+.dot.now{box-shadow:0 0 6px 2px rgba(106,159,216,.45)}
+.counter{color:var(--muted);font-size:14px;margin-top:20px;height:20px;line-height:20px}
 .label{color:var(--muted);margin-bottom:12px}
 textarea{width:100%;max-width:400px;height:82px;background:#111;color:var(--text);border:1px solid var(--border);
          border-radius:8px;padding:12px;font:inherit;resize:vertical;outline:none;margin-bottom:14px}
