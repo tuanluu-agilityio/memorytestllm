@@ -7,6 +7,10 @@ export const scoreLocal = (words: string[], raw: string): boolean[] => {
   return words.map((w) => typed.has(w));
 };
 
+/** Typed words that were never shown, in typed order. */
+export const hallucinated = (words: string[], raw: string): string[] =>
+  [...parseTyped(raw)].filter((t) => !words.includes(t));
+
 export function thirds(hit: boolean[]) {
   const n = hit.length;
   const third = Math.floor(n / 3);

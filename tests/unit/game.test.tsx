@@ -47,5 +47,18 @@ describe('Game', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Check My Memory' }));
     expect(await screen.findByText((_, el) => el?.className === 'score')).toHaveTextContent('You recalled 1 of 15');
     expect(onResult).toHaveBeenCalledWith({ sessionId: 's', claimToken: 't', words }, { score: 1, recalled });
+    expect(screen.queryByText('Hallucinated')).not.toBeInTheDocument();
+  });
+
+  test('lists typed words that were never shown under Hallucinated', async () => {
+    vi.mocked(api.startSession).mockResolvedValue({ sessionId: 's', claimToken: 't', words });
+    vi.mocked(api.submitSession).mockResolvedValue({ score: 0, recalled: words.map(() => false) });
+    render(<Game />);
+    await userEvent.click(screen.getByRole('button', { name: 'Show the Words' }));
+    await userEvent.type(await screen.findByRole('textbox', {}, { timeout: 3000 }), 'dark');
+    await userEvent.click(screen.getByRole('button', { name: 'Check My Memory' }));
+    expect(await screen.findByText('Hallucinated')).toBeInTheDocument();
+    const extra = document.querySelectorAll('.chip.extra');
+    expect([...extra].map((el) => el.textContent)).toEqual(['dark']);
   });
 });
