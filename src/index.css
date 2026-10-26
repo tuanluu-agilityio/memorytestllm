@@ -49,6 +49,8 @@ textarea:focus{border-color:#35507a}
 .chip i{font-style:normal;font-size:10px;opacity:.7;margin-right:4px}
 .chip.hit{color:var(--green);background:var(--green-bg);border-color:var(--green-bd)}
 .chip.miss{color:var(--orange);background:var(--miss-bg);border-color:var(--miss-bd);text-decoration:line-through;text-decoration-color:#7a3d30}
+.halluc-label{color:var(--orange);font-size:11px;letter-spacing:.12em;font-weight:500;text-transform:uppercase;margin-bottom:8px}
+.chip.extra{color:var(--orange);background:var(--miss-bg);border-color:#8a4636}
 .chart{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px 24px 16px;margin-bottom:16px}
 .chart h3{margin:0 0 14px;font-size:11px;letter-spacing:.08em;font-weight:500;color:var(--muted);text-transform:uppercase}
 .bars{display:flex;gap:4px;height:60px;align-items:flex-end}

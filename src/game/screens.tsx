@@ -71,7 +71,7 @@ export function Recall({ onCheck, busy }: { onCheck: (typed: string) => void; bu
   );
 }
 
-export function Results({ words, hit, onReplay, slot }: { words: string[]; hit: boolean[]; onReplay: () => void; slot?: ReactNode }) {
+export function Results({ words, hit, extra = [], onReplay, slot }: { words: string[]; hit: boolean[]; extra?: string[]; onReplay: () => void; slot?: ReactNode }) {
   const n = hit.filter(Boolean).length;
   const t = thirds(hit);
   return (
@@ -81,6 +81,12 @@ export function Results({ words, hit, onReplay, slot }: { words: string[]; hit: 
       <div className="chips">
         {words.map((w, i) => <span key={w} className={`chip ${hit[i] ? 'hit' : 'miss'}`}><i>{i + 1}</i>{w}</span>)}
       </div>
+      {extra.length > 0 && (
+        <div className="halluc">
+          <div className="halluc-label">Hallucinated</div>
+          <div className="chips">{extra.map((w) => <span key={w} className="chip extra">{w}</span>)}</div>
+        </div>
+      )}
       <BarChart title="Serial position — your recall pattern" values={hit.map((h) => (h ? 1 : 0))} />
       <div className="stats">Beginning {t.beginning}% · Middle {t.middle}% · End {t.end}%</div>
       <div className="insight">

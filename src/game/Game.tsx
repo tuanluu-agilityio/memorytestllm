@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import { CFG } from '../config';
 import { markReplayed, startSession, submitSession, type ScoredResult, type StartedSession } from '../lib/api';
-import { scoreLocal } from '../lib/scoring';
+import { hallucinated, scoreLocal } from '../lib/scoring';
 import { ErrorCard, Intro, Presenter, Recall, Results } from './screens';
 
 type Screen = 'intro' | 'error' | 'present' | 'recall' | 'results';
@@ -17,6 +17,7 @@ export default function Game({ onResult, slot }: Props) {
   const [screen, setScreen] = useState<Screen>('intro');
   const [session, setSession] = useState<StartedSession | null>(null);
   const [hit, setHit] = useState<boolean[]>([]);
+  const [extra, setExtra] = useState<string[]>([]);
   const [replaying, setReplaying] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -35,6 +36,7 @@ export default function Game({ onResult, slot }: Props) {
 
   async function check(typed: string) {
     if (!session) return;
+    setExtra(hallucinated(session.words, typed));
     if (replaying) {
       setHit(scoreLocal(session.words, typed));
       setScreen('results');
@@ -66,7 +68,7 @@ export default function Game({ onResult, slot }: Props) {
       {screen === 'error' && <ErrorCard onRetry={start} />}
       {screen === 'present' && session && <Presenter key={String(replaying)} words={session.words} onDone={() => setScreen('recall')} />}
       {screen === 'recall' && <Recall onCheck={check} busy={busy} />}
-      {screen === 'results' && session && <Results words={session.words} hit={hit} onReplay={replay} slot={slot} />}
+      {screen === 'results' && session && <Results words={session.words} hit={hit} extra={extra} onReplay={replay} slot={slot} />}
     </section>
   );
 }
