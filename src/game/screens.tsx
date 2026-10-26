@@ -27,6 +27,8 @@ export function ErrorCard({ onRetry }: { onRetry: () => void }) {
 export function Presenter({ words, onDone }: { words: string[]; onDone: () => void }) {
   const [word, setWord] = useState('');
   const [count, setCount] = useState('');
+  const [shown, setShown] = useState(0);
+  const [live, setLive] = useState(false);
   const done = useRef(onDone);
   done.current = onDone;
 
@@ -35,9 +37,9 @@ export function Presenter({ words, onDone }: { words: string[]; onDone: () => vo
     (async () => {
       for (let i = 0; i < words.length; i++) {
         if (cancelled) return;
-        setWord(words[i]); setCount(`${i + 1} of ${CFG.count}`);
+        setWord(words[i]); setCount(`${i + 1} of ${CFG.count}`); setShown(i + 1); setLive(true);
         await sleep(CFG.showMs);
-        setWord(''); await sleep(CFG.gapMs);
+        setWord(''); setLive(false); await sleep(CFG.gapMs);
       }
       if (cancelled) return;
       setWord('Done!'); setCount('');
@@ -47,7 +49,15 @@ export function Presenter({ words, onDone }: { words: string[]; onDone: () => vo
     return () => { cancelled = true; };
   }, [words]);
 
-  return (<><div className="word">{word}</div><div className="counter">{count}</div></>);
+  return (<>
+    <div className="word">{word}</div>
+    <div className="dots" aria-hidden="true">
+      {words.map((_, i) => (
+        <span key={i} className={`dot${i < shown ? ' on' : ''}${live && i === shown - 1 ? ' now' : ''}`} />
+      ))}
+    </div>
+    <div className="counter">{count}</div>
+  </>);
 }
 
 export function Recall({ onCheck, busy }: { onCheck: (typed: string) => void; busy: boolean }) {
